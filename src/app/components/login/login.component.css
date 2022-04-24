@@ -1,0 +1,55 @@
+.field:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.register {
+    margin-top: 10rem;
+    background: white;
+    border-radius: 10px;
+}
+
+.left,
+.right {
+    padding: 4.5rem;
+}
+
+.left .title {
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.left .colored {
+    color: gray;
+    font-weight: 500;
+    margin-top: 1rem !important;
+    letter-spacing: -1px;
+}
+
+.left p {
+    color: gray;
+    font-size: 1.15rem;
+}
+
+.right .title {
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.right .description {
+    margin-top: 1rem;
+    margin-bottom: 1rem !important;
+    color: gray;
+    font-size: 1.15rem;
+}
+
+.right small {
+    color: var(--textLight);
+}
+
+input {
+    font-size: 1rem;
+}
+
+.full-width {
+    width: 100%;
+}

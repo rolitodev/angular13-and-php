@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+    background-color: transparent !important;
+    overflow-y: auto !important;
+}
+
+body,
+button,
+.mat-h1,
+.mat-headline,
+.mat-typography .mat-h1,
+.mat-typography .mat-headline,
+.mat-typography h1 {
+    font-family: "Roboto", "Helvetica Neue", sans-serif !important;
+}
+
+body {
+    background-color: rgb(238, 235, 235);
+}
+
+@media screen and (max-width: 700px) {
+    .ngx_notification-msg-opened {
+        width: 100%;
+        padding: 10px;
+        position: fixed !important;
+    }
+}
+
+.ngx_notification-msg-opened {
+    position: fixed !important;
+    bottom: 0px;
+}
+
+.modal {
+    z-index: 2 !important;
+}
+
+.ngx_notification-msg {
+    z-index: 3 !important;
+}
