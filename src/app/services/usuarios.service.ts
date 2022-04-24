@@ -65,6 +65,15 @@ export class UsuariosService {
     )
   }
 
+  eliminarUsuario(usuario: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete.php?idUser=${usuario.id}`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
     return throwError(error);
   }
