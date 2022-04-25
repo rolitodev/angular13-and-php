@@ -14,6 +14,8 @@ header("Access-Control-Allow-Headers: *");
     $sentencia = $bd->prepare("INSERT INTO usuarios(nombres, apellidos, password, correo) VALUES (?, ?, ?, ?)");
     $resultado = $sentencia->execute([$jsonRegistro->nombres, $jsonRegistro->apellidos, $jsonRegistro->password, $jsonRegistro->correo]);
 
-    echo json_encode($resultado);
+    $registro = $sentencia->fetchObject();
+
+    echo json_encode($registro);
 
 ?>
