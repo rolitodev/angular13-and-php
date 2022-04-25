@@ -1,6 +1,7 @@
 <?php
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
+    header("Access-Control-Allow-Methods: PUT");
 
     if ($_SERVER["REQUEST_METHOD"] != "PUT") {
         exit("Solo acepto peticiones PUT");

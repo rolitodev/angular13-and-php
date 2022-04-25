@@ -51,9 +51,10 @@ export class RegistroComponent implements OnInit {
       } else {
         this._notificaciones.mostrar("error", "Tu usuario no se ha podido registrar, quizás el correo ya está siendo usado. Intenta de nuevo.");
       }
-    }), catchError((error) => {
+    }, err => {
+      this._notificaciones.mostrar("error", "Tu usuario no se ha podido registrar, quizás el correo ya está siendo usado. Intenta de nuevo.");
       this.cargandoBoton = false;
-      return error;
+      throw err;
     });
 
   }

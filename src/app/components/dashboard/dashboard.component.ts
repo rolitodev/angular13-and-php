@@ -104,9 +104,9 @@ export class DashboardComponent implements OnInit {
     }
 
     this._usuarios.eliminarUsuario(usuario).subscribe((res: any) => {
-      console.log(res);
       if (res) {
         this._notificaciones.mostrar("correcto", "Has eliminado el usuario correctamente.");
+        this.obtenerTodosLosUsuarios();
       } else {
         this._notificaciones.mostrar("error", "Hubo un error al intentar eliminar el usuario desde base de datos.");
       }
