@@ -1,6 +1,6 @@
 <?php
 
-    header("Access-Control-Allow-Origin: http://localhost:4200");
+    header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
 
     $jsonLogin = json_decode(file_get_contents("php://input"));
