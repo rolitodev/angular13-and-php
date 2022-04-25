@@ -37,6 +37,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerTodosLosUsuarios();
+  }
+
+  obtenerTodosLosUsuarios(): void {
 
     this.user = this._auth.currentUser;
 
@@ -89,6 +93,27 @@ export class DashboardComponent implements OnInit {
   recibirEmitirEstado(estado: boolean): void {
     this.mostrarModal = estado;
     this.usuarioAEditar = null;
+    this.obtenerTodosLosUsuarios();
+  }
+
+  eliminarUsuario(usuario: any) {
+
+    if (usuario.id === this._auth.currentUser.id) {
+      this._notificaciones.mostrar("error", "No puedes eliminarte a ti mismo de la base de datos.");
+      return;
+    }
+
+    this._usuarios.eliminarUsuario(usuario).subscribe((res: any) => {
+      console.log(res);
+      if (res) {
+        this._notificaciones.mostrar("correcto", "Has eliminado el usuario correctamente.");
+      } else {
+        this._notificaciones.mostrar("error", "Hubo un error al intentar eliminar el usuario desde base de datos.");
+      }
+    }), catchError((error) => {
+      this._notificaciones.mostrar("error", "Hubo un error al intentar eliminar el usuario desde base de datos.");
+      return error;
+    });
   }
 
   cerarSesion(): void {
