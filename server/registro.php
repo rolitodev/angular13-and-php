@@ -1,7 +1,7 @@
 <?php
 
-    header("Access-Control-Allow-Origin: http://localhost:4200");
-    header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Headers: *");
 
     $jsonRegistro = json_decode(file_get_contents("php://input"));
 

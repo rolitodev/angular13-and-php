@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost/server",
+  baseUrl: "https://inmobiliariapuilo.alwaysdata.net/server",
 };
 
 /*

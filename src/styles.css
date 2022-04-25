@@ -39,3 +39,7 @@ body {
 .ngx_notification-msg {
     z-index: 3 !important;
 }
+
+.disclamer {
+    display: none !important;
+  }
