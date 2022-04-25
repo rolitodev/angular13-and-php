@@ -23,11 +23,6 @@ export class UsuariosService {
 
     return this.http.post(`${this.baseUrl}/registro.php`, registro).pipe(
       map((respuesta: any) => {
-        if (respuesta) {
-          console.log(respuesta);
-          this._storage.setItem("user", { ...respuesta });
-          this._auth.setUser();
-        }
         return respuesta;
       }),
       catchError(this.handleError)

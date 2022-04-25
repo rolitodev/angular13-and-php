@@ -46,8 +46,8 @@ export class RegistroComponent implements OnInit {
     this._usuarios.registro(this.formularioRegistro.getRawValue()).subscribe((res: any) => {
       this.cargandoBoton = false;
       if (res) {
-        this.router.navigate(["/dashboard"]);
-        this._notificaciones.mostrar("exito", "Tu usuario ha sido registrado correctamente.");
+        this._notificaciones.mostrar("exito", "Tu usuario ha sido registrado correctamente. Debes iniciar sesión.");
+        this.router.navigate(["/login"]);
       } else {
         this._notificaciones.mostrar("error", "Tu usuario no se ha podido registrar, quizás el correo ya está siendo usado. Intenta de nuevo.");
       }
