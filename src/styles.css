@@ -1,18 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 
 html {
     background-color: transparent !important;
     overflow-y: auto !important;
-}
-
-body,
-button,
-.mat-h1,
-.mat-headline,
-.mat-typography .mat-h1,
-.mat-typography .mat-headline,
-.mat-typography h1 {
-    font-family: "Roboto", "Helvetica Neue", sans-serif !important;
 }
 
 body {
@@ -42,4 +34,4 @@ body {
 
 .disclamer {
     display: none !important;
-  }
+}

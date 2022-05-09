@@ -1,127 +1,168 @@
-<mat-toolbar>
-    <span>Inmobiliaria Builo</span>
-    <span class="example-spacer"></span>
-    <button class="button" mat-raised-button color="primary" (click)="cerarSesion()">
-        Cerrar Sesión
-    </button>
-    <a style="margin-left: 10px;">
-        Hola {{ user.nombres }}!
-    </a>
-</mat-toolbar>
-
-<mat-progress-bar mode="query" *ngIf="cargandoDatos"></mat-progress-bar>
-
-<div class="container is-max-desktop">
-
-    <section class="featured">
-
-        <br>
-
-        <div class="level">
-
-            <div class="level-left">
-                <div class="level-item">
-                    <h2 class="subtitle">Nuestra Plataforma</h2>
+<div style="position: sticky; top: 0px; z-index: 1;">
+    <nav class="navbar is-white" style="margin-bottom: 0px;">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item brand-text">
+                    Builo Inmobiliaria
+                </a>
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" [routerLink]="['/dashboard']">
+                        Inicio
+                    </a>
+                    <a class="navbar-item" [routerLink]="['inmuebles']">
+                        Inmuebles
+                    </a>
+                </div>
 
-        </div>
-
-        <div class="columns">
-
-            <div class="column is-3">
-                <article class="card">
-                    <figure class="image is-5by3">
-                        <img src="https://i.imgur.com/jVJHwmi.png" style="object-fit: cover; height: 150px;" />
-                    </figure>
-                    <div style="padding: 20px;">
-                        <h2 class="subtitle">Usuarios Registrados {{ usuariosRegistrados ? usuariosRegistrados : 0}}
-                        </h2>
-                        <span class="tag is-rounded">Usuarios</span>
-                    </div>
-                </article>
             </div>
-
         </div>
 
-    </section>
-
-    <br>
-
-    <section class="categories">
-
-        <br>
-
-        <div class="columns">
-
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="nombres">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
-                </ng-container>
-
-                <!-- Weight Column -->
-                <ng-container matColumnDef="apellidos">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
-                    <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
-                </ng-container>
-
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="correo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
-                    <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="botones">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-mini-fab color="primary" (click)="editarUsuario(element);">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon">
-                                mode_edit
-                            </mat-icon>
-                        </button>
-                        <button mat-mini-fab color="primary" style="background-color: red; margin-left: 10px;"
-                            (click)="eliminarUsuario(element);">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon">
-                                delete
-                            </mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-
-        </div>
-
-    </section>
-
-    <br>
-
+    </nav>
+    <mat-progress-bar mode="query" *ngIf="cargandoDatos" style="width: 100%;"></mat-progress-bar>
 </div>
 
-<br>
-<br>
+<div class="container">
 
-<footer class="footer">
-    <div class="container">
-        <div class="content has-text-centered">
-            <div class="links">
-                <div class="level-item">
-                    {{ actualYear }} Builo Inmobiliaria - Todos los derechos reservados
+    <div class="columns">
+
+        <div class="column">
+
+            <section class="hero is-info welcome is-small">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Hola {{ user.nombres }},
+                        </h1>
+                        <h2 class="subtitle">
+                            Que tengas un buen día.
+                        </h2>
+                        <button class="button" mat-raised-button color="primary" (click)="cerarSesion()">
+                            Cerrar Sesión
+                        </button>
+                    </div>
                 </div>
-            </div><br>
+            </section>
+
+            <section class="info-tiles">
+                <div class="tile is-ancestor has-text-centered">
+                    <div class="tile is-parent">
+                        <article class="tile is-child box">
+                            <p class="title">{{ usuariosRegistrados ? usuariosRegistrados : 0}}</p>
+                            <p class="subtitle">Usuarios</p>
+                        </article>
+                    </div>
+                    <div class="tile is-parent">
+                        <article class="tile is-child box">
+                            <p class="title">{{ contadorInmuebles ? contadorInmuebles: 0 }}</p>
+                            <p class="subtitle">Inmuebles</p>
+                        </article>
+                    </div>
+                    <div class="tile is-parent">
+                        <article class="tile is-child box">
+                            <p class="title">{{ contratosRegistrados ? contratosRegistrados : 0 }}</p>
+                            <p class="subtitle">Contratos</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <div class="columns">
+
+                <div class="column">
+
+                    <div class="card events-card">
+
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Tabla de Usuarios
+                            </p>
+                        </header>
+
+                        <div class="card-table">
+
+                            <div class="content">
+
+                                <table mat-table [dataSource]="dataSource" class="table is-fullwidth is-striped"
+                                    matSort>
+
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="nombres">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="apellidos">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="correo">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="pais">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> País </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.pais}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="rol">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.idrol === '1' ?
+                                            'Administrador': 'Usuario' }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="botones">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <ng-container *ngIf="user && user.id === '1'">
+                                                <button mat-mini-fab color="primary" (click)="editarUsuario(element);">
+                                                    <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                                        mode_edit
+                                                    </mat-icon>
+                                                </button>
+                                                <button mat-mini-fab color="primary"
+                                                    style="background-color: red; margin-left: 10px;"
+                                                    (click)="eliminarUsuario(element);">
+                                                    <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                                        delete
+                                                    </mat-icon>
+                                                </button>
+                                            </ng-container>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
+
     </div>
-</footer>
+
+</div>
 
 <app-editar-usuarios [mostrarModal]="mostrarModal" [usuarioAEditar]="usuarioAEditar"
     (emitirEstado)="recibirEmitirEstado($event);"></app-editar-usuarios>

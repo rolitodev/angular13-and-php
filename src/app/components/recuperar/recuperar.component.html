@@ -1,0 +1,46 @@
+<section class="container">
+
+    <div class="columns is-multiline">
+
+        <div class="column is-8 is-offset-2 register">
+
+            <div class="columns">
+
+                <div class="column right has-text-centered">
+
+                    <h1 class="title is-2">Perdí mi contaseña</h1>
+                    <p class="description">Ingresa tu correo para enviarte una nueva contraseña.</p>
+
+                    <form [formGroup]="recuperarForm" (ngSubmit)="enviarCorreoUsuario();">
+                        <div class="field">
+                            <div class="control">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Correo</mat-label>
+                                    <input type="email" matInput placeholder="Ingresa tu correo electrónico"
+                                        formControlName="correo">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <button class="button is-block is-primary is-fullwidth is-medium" type="submit"
+                            [disabled]="cargandoBoton">Recuperar</button>
+
+                        <br>
+
+                        <small>
+                            <a [routerLink]="['/registro']">¿No tienes una cuenta?</a>
+                            <br>
+                            <a [routerLink]="['/login']">Loguearme</a>
+                        </small>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

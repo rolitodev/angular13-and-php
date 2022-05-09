@@ -52,6 +52,28 @@ export class UsuariosService {
 
   }
 
+  contadorContratos(): Observable<any> {
+
+    return this.http.get(`${this.baseUrl}/contadorContratos.php`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+
+  }
+
+  contadorInmuebles(): Observable<any> {
+
+    return this.http.get(`${this.baseUrl}/contadorInmuebles.php`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+
+  }
+
   actualizarUsuario(usuario: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/update.php`, usuario).pipe(
       map((respuesta: any) => {
@@ -63,6 +85,15 @@ export class UsuariosService {
 
   eliminarUsuario(usuario: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/delete.php?idUser=${usuario.id}`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  enviarCorreo(usuario: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/sendEmail.php`, usuario).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),

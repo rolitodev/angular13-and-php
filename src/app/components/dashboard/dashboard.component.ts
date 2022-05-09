@@ -5,6 +5,7 @@ import { catchError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { allCountries } from 'src/app/tools/countries.tool';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,8 @@ export class DashboardComponent implements OnInit {
 
   public user: any = null;
 
-  public displayedColumns: string[] = ['id', 'nombres', 'apellidos', 'correo', 'botones'];
+  public displayedColumns: string[] = ['id', 'nombres', 'apellidos', 'correo', 'pais', 'rol', 'botones'];
+  public countries: any = [];
   public dataSource: any = [];
 
   public cargandoDatos: boolean = false;
@@ -29,6 +31,8 @@ export class DashboardComponent implements OnInit {
   public actualYear = new Date().getFullYear();
 
   public usuariosRegistrados: number = 0;
+  public contratosRegistrados: number = 0;
+  public contadorInmuebles: number = 0;
 
   constructor(private _auth: AuthService, private _usuarios: UsuariosService, private _notificaciones: NotificacionesService) { }
 
@@ -43,6 +47,7 @@ export class DashboardComponent implements OnInit {
   obtenerTodosLosUsuarios(): void {
 
     this.user = this._auth.currentUser;
+    console.log(this.user);
 
     if (this.user) {
 
@@ -77,7 +82,34 @@ export class DashboardComponent implements OnInit {
         });
       });
 
-      Promise.all([primeraPromesa, segundaPromesa]).then(() => {
+      let terceraPromesa = new Promise((resolve, reject) => {
+        this._usuarios.contadorContratos().subscribe((res: any) => {
+          if (res.contador_contratos) {
+            this.contratosRegistrados = res.contador_contratos;
+            resolve(res);
+          }
+        }), catchError((error) => {
+          reject(error);
+          this._notificaciones.mostrar("error", "Hubo un error al intentar cargar el contador de los contratos desde base de datos.");
+          return error;
+        });
+      });
+
+      let cuartaPromesa = new Promise((resolve, reject) => {
+        this._usuarios.contadorInmuebles().subscribe((res: any) => {
+          if (res.contador_inmuebles) {
+            this.contadorInmuebles = res.contador_inmuebles;
+            resolve(res);
+          }
+        }), catchError((error) => {
+          reject(error);
+          this._notificaciones.mostrar("error", "Hubo un error al intentar cargar el contador de los contratos desde base de datos.");
+          return error;
+        });
+      });
+
+      Promise.all([primeraPromesa, segundaPromesa, terceraPromesa, cuartaPromesa]).then(() => {
+        console.log("x");
         this.cargandoDatos = false;
       });
 

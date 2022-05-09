@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { allCountries } from 'src/app/tools/countries.tool';
 
 @Component({
   selector: 'app-registro',
@@ -16,6 +17,7 @@ export class RegistroComponent implements OnInit {
   public formularioRegistro: FormGroup;
   public hide: boolean = true;
   public cargandoBoton: boolean = false;
+  public countries: any = [];
 
   constructor(
     public _fb: FormBuilder,
@@ -27,11 +29,16 @@ export class RegistroComponent implements OnInit {
       nombres: [null, [Validators.required]],
       apellidos: [null, [Validators.required]],
       correo: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required]]
+      password: [null, [Validators.required]],
+      pais: [[], [Validators.required]],
+      telefono: [null, [Validators.required]],
+      direccion: [null, [Validators.required]],
+      idrol: [1]
     });
   }
 
   ngOnInit(): void {
+    this.countries = allCountries();
   }
 
   enviarFomulario(): void {

@@ -60,7 +60,7 @@ export class AuthService {
   async logout() {
     await this._storage.removeItem("user")
     await this._storage.clear();
-    this.router.navigate(['/login'], {
+    this.router.navigate(['/inicio'], {
       queryParams: {},
     });
   }

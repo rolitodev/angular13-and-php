@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -20,6 +21,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EditarUsuariosComponent } from './components/dashboard/editar-usuarios/editar-usuarios.component';
+import { HomeComponent } from './components/home/home.component';
+import { RecuperarComponent } from './components/recuperar/recuperar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { EditarUsuariosComponent } from './components/dashboard/editar-usuarios/
     LoginComponent,
     DashboardComponent,
     RegistroComponent,
-    EditarUsuariosComponent
+    EditarUsuariosComponent,
+    HomeComponent,
+    RecuperarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,8 @@ import { EditarUsuariosComponent } from './components/dashboard/editar-usuarios/
     MatToolbarModule,
     MatTableModule,
     MatSortModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
