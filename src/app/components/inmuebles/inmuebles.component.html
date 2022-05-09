@@ -1,0 +1,29 @@
+<div style="position: sticky; top: 0px; z-index: 1;">
+    <nav class="navbar is-white" style="margin-bottom: 0px;">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item brand-text">
+                    Builo Inmobiliaria
+                </a>
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" [routerLink]="['/dashboard']">
+                        Inicio
+                    </a>
+                    <a class="navbar-item" [routerLink]="['/inmuebles']">
+                        Inmuebles
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </nav>
+    <!-- <mat-progress-bar mode="query" *ngIf="cargandoDatos" style="width: 100%;"></mat-progress-bar> -->
+</div>

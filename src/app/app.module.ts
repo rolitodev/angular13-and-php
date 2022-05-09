@@ -23,6 +23,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EditarUsuariosComponent } from './components/dashboard/editar-usuarios/editar-usuarios.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecuperarComponent } from './components/recuperar/recuperar.component';
+import { InmueblesComponent } from './components/inmuebles/inmuebles.component';
+import { CrearUsuariosComponent } from './components/dashboard/crear-usuarios/crear-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { RecuperarComponent } from './components/recuperar/recuperar.component';
     RegistroComponent,
     EditarUsuariosComponent,
     HomeComponent,
-    RecuperarComponent
+    RecuperarComponent,
+    InmueblesComponent,
+    CrearUsuariosComponent
   ],
   imports: [
     BrowserModule,

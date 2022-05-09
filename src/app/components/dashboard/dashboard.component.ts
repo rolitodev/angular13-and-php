@@ -5,7 +5,6 @@ import { catchError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { allCountries } from 'src/app/tools/countries.tool';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,12 +18,13 @@ export class DashboardComponent implements OnInit {
 
   public user: any = null;
 
-  public displayedColumns: string[] = ['id', 'nombres', 'apellidos', 'correo', 'pais', 'rol', 'botones'];
+  public displayedColumns: string[] = ['id', 'fecha_registro', 'nombres', 'apellidos', 'correo', 'pais', 'rol', 'botones'];
   public countries: any = [];
   public dataSource: any = [];
 
   public cargandoDatos: boolean = false;
   public mostrarModal: boolean = false;
+  public mostrarModalUsuarios: boolean = false;
 
   public usuarioAEditar: any = {};
 
@@ -47,7 +47,6 @@ export class DashboardComponent implements OnInit {
   obtenerTodosLosUsuarios(): void {
 
     this.user = this._auth.currentUser;
-    console.log(this.user);
 
     if (this.user) {
 
@@ -109,7 +108,6 @@ export class DashboardComponent implements OnInit {
       });
 
       Promise.all([primeraPromesa, segundaPromesa, terceraPromesa, cuartaPromesa]).then(() => {
-        console.log("x");
         this.cargandoDatos = false;
       });
 
@@ -122,9 +120,18 @@ export class DashboardComponent implements OnInit {
     this.mostrarModal = true;
   }
 
+  crearUsuario(): void {
+    this.mostrarModalUsuarios = !this.mostrarModalUsuarios;
+  }
+
   recibirEmitirEstado(estado: boolean): void {
     this.mostrarModal = estado;
     this.usuarioAEditar = null;
+    this.obtenerTodosLosUsuarios();
+  }
+
+  refreshDataReceive(estado: boolean): void {
+    this.mostrarModalUsuarios = estado;
     this.obtenerTodosLosUsuarios();
   }
 

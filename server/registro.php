@@ -11,8 +11,8 @@ header("Access-Control-Allow-Headers: *");
 
     $bd = include_once "bd.php";
 
-    $sentencia = $bd->prepare("INSERT INTO usuarios(nombres, apellidos, password, correo, idrol, pais, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $resultado = $sentencia->execute([$jsonRegistro->nombres, $jsonRegistro->apellidos, $jsonRegistro->password, $jsonRegistro->correo, $jsonRegistro->idrol, $jsonRegistro->pais, $jsonRegistro->direccion, $jsonRegistro->telefono]);
+    $sentencia = $bd->prepare("INSERT INTO usuarios(nombres, apellidos, password, correo, idrol, pais, direccion, telefono, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $resultado = $sentencia->execute([$jsonRegistro->nombres, $jsonRegistro->apellidos, $jsonRegistro->password, $jsonRegistro->correo, $jsonRegistro->idrol, $jsonRegistro->pais, $jsonRegistro->direccion, $jsonRegistro->telefono, $jsonRegistro->fecha]);
 
     echo json_encode($resultado);
 

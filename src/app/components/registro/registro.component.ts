@@ -31,9 +31,10 @@ export class RegistroComponent implements OnInit {
       correo: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
       pais: [[], [Validators.required]],
-      telefono: [null, [Validators.required]],
+      telefono: [null, [Validators.required, Validators.maxLength(11)]],
       direccion: [null, [Validators.required]],
-      idrol: [1]
+      idrol: [1],
+      fecha: [new Date()]
     });
   }
 

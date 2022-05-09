@@ -16,7 +16,7 @@
                     <a class="navbar-item" [routerLink]="['/dashboard']">
                         Inicio
                     </a>
-                    <a class="navbar-item" [routerLink]="['inmuebles']">
+                    <a class="navbar-item" [routerLink]="['/inmuebles']">
                         Inmuebles
                     </a>
                 </div>
@@ -83,6 +83,15 @@
                             <p class="card-header-title">
                                 Tabla de Usuarios
                             </p>
+
+                            <button mat-mini-fab color="primary"
+                                style="background-color: rgb(43, 104, 216); margin-left: 10px;"
+                                (click)="crearUsuario();" *ngIf="user && user.idrol === '1'">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    add
+                                </mat-icon>
+                            </button>
+
                         </header>
 
                         <div class="card-table">
@@ -97,6 +106,10 @@
                                         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                                     </ng-container>
 
+                                    <ng-container matColumnDef="fecha_registro">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+                                    </ng-container>
 
                                     <ng-container matColumnDef="nombres">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
@@ -127,7 +140,7 @@
                                     <ng-container matColumnDef="botones">
                                         <th mat-header-cell *matHeaderCellDef></th>
                                         <td mat-cell *matCellDef="let element">
-                                            <ng-container *ngIf="user && user.id === '1'">
+                                            <ng-container *ngIf="user && user.idrol === '1'">
                                                 <button mat-mini-fab color="primary" (click)="editarUsuario(element);">
                                                     <mat-icon aria-hidden="false" aria-label="Example home icon">
                                                         mode_edit
@@ -165,4 +178,8 @@
 </div>
 
 <app-editar-usuarios [mostrarModal]="mostrarModal" [usuarioAEditar]="usuarioAEditar"
-    (emitirEstado)="recibirEmitirEstado($event);"></app-editar-usuarios>
+    (emitirEstado)="recibirEmitirEstado($event);">
+</app-editar-usuarios>
+
+<app-crear-usuarios [mostrarModalUsuarios]="mostrarModalUsuarios" (refreshData)="refreshDataReceive($event);">
+</app-crear-usuarios>
