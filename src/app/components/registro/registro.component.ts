@@ -33,7 +33,7 @@ export class RegistroComponent implements OnInit {
       pais: [[], [Validators.required]],
       telefono: [null, [Validators.required, Validators.maxLength(11)]],
       direccion: [null, [Validators.required]],
-      idrol: [1],
+      idrol: [2],
       fecha: [new Date()]
     });
   }
