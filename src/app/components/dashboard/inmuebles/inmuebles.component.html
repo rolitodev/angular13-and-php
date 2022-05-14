@@ -1,0 +1,114 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+    <div fxFlex="95%">
+
+        <mat-card>
+
+            <mat-card-content>
+
+                <h2>Inmuebles Registrados</h2>
+
+                <div class="center-items">
+
+                    <button mat-mini-fab color="primary" style="background-color: rgb(43, 104, 216); margin-left: 10px;"
+                        (click)="openDialogNuevo();" *ngIf="user && user.idrol === '1'">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">
+                            add
+                        </mat-icon>
+                    </button>
+
+                </div>
+
+                <div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+                    <table mat-table [dataSource]="dataSource" class="table is-fullwidth is-striped" matSort>
+
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Creación</th>
+                            <td mat-cell *matCellDef="let element"> {{element.fecha ? element.fecha : '-'}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="matricula">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricula</th>
+                            <td mat-cell *matCellDef="let element"> {{element.matricula}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_propietario">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Propietario </th>
+                            <td mat-cell *matCellDef="let element"> {{ retornarPropietario(element.id_propietario) }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_tipo_inmueble">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Inmueble </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.id_tipo_inmueble === '1'">Casa</ng-container>
+                                <ng-container *ngIf="element.id_tipo_inmueble === '3'">Apartamento</ng-container>
+                                <ng-container *ngIf="element.id_tipo_inmueble === '4'">Terreno</ng-container>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_ubicacion_inmueble">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ubicación Inmueble </th>
+                            <td mat-cell *matCellDef="let element"> {{ retornarUbicacionInmueble(element.
+                                id_ubicacion_inmueble) }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="valor_comercial">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Comercial </th>
+                            <td mat-cell *matCellDef="let element"> {{element.valor_comercial}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="area_total">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Area Total </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.area_total }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="area_construida">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Area Construida </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.area_construida }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="botones">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="user && user.idrol === '1'">
+                                    <button class="botones-personalizados editar" (click)="editarInmueble(element);">
+                                        <mat-icon aria-hidden="false">
+                                            mode_edit
+                                        </mat-icon>
+                                    </button>
+                                    <button class="botones-personalizados eliminar"
+                                        (click)="eliminarInmueble(element);">
+                                        <mat-icon aria-hidden="false">
+                                            delete
+                                        </mat-icon>
+                                    </button>
+                                </ng-container>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[10, 20, 30]" aria-label="Selecciona la página">
+                    </mat-paginator>
+
+                </div>
+
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+
+</div>

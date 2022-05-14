@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
@@ -14,34 +14,55 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 
 export class DashboardComponent implements OnInit {
 
-  @ViewChild(MatSort) sort!: MatSort;
+  private _mobileQueryListener: () => void;
+  public mobileQuery: MediaQueryList;
 
   public user: any = null;
-
-  public displayedColumns: string[] = ['id', 'fecha_registro', 'nombres', 'apellidos', 'correo', 'pais', 'rol', 'botones'];
-  public countries: any = [];
-  public dataSource: any = [];
-
   public cargandoDatos: boolean = false;
-  public mostrarModal: boolean = false;
-  public mostrarModalUsuarios: boolean = false;
-
-  public usuarioAEditar: any = {};
-
-  public actualYear = new Date().getFullYear();
 
   public usuariosRegistrados: number = 0;
   public contratosRegistrados: number = 0;
   public contadorInmuebles: number = 0;
 
-  constructor(private _auth: AuthService, private _usuarios: UsuariosService, private _notificaciones: NotificacionesService) { }
+  public dataUsuarios: any = {};
+
+  public config: { version: string; };
+
+  constructor(
+    private _auth: AuthService, private _usuarios: UsuariosService, private _notificaciones: NotificacionesService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private media: MediaMatcher,
+    public router: Router
+  ) {
+    this.config = { version: "0" };
+    this.config = require("../../../assets/version.json"); // Obtenemos el archivo de la version
+    this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.router.events.subscribe((res: any) => { // Nos suscribimos al cambio de route (ruta)
+      if (res instanceof NavigationEnd) {
+        this.obtenerTodosLosUsuarios(); // Lamammos a los usuarios
+      }
+    });
+
+    this._usuarios.refrescar.subscribe((res: any) => {
+      if (res) {
+        this.obtenerTodosLosUsuarios();
+      }
+    });
+
+  }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    this.changeDetectorRef.detectChanges(); // Despues de que termine de cargar la vista detectamos cambios
   }
 
   ngOnInit(): void {
-    this.obtenerTodosLosUsuarios();
+  }
+
+  ngOnDestroy() {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   obtenerTodosLosUsuarios(): void {
@@ -51,111 +72,23 @@ export class DashboardComponent implements OnInit {
     if (this.user) {
 
       this.cargandoDatos = true;
-
-      let primeraPromesa = new Promise((resolve, reject) => {
-        this._usuarios.contadorUsuarios().subscribe((res: any) => {
-          if (res.contador_usuarios) {
-            this.usuariosRegistrados = res.contador_usuarios;
-            resolve(res);
-          }
-        }), catchError((error) => {
-          reject(error);
-          this._notificaciones.mostrar("error", "Hubo un error al intentar cargar el contador de los usuarios desde base de datos.");
-          return error;
-        });
-      })
-
-      let segundaPromesa = new Promise((resolve, reject) => {
-        this._usuarios.obtenerTodos().subscribe((res: any) => {
-          if (res) {
-            this.dataSource = new MatTableDataSource(res);
-            this.dataSource.sort = this.sort;
-          } else {
-            this._notificaciones.mostrar("info", "No hay usuarios para cargar desde la base de datos.");
-          }
-          resolve(res);
-        }), catchError((error) => {
-          reject(error);
-          this._notificaciones.mostrar("error", "Hubo un error al intentar cargar los usuarios desde base de datos.");
-          return error;
-        });
+      this._usuarios.obtenerTodos().subscribe((res: any) => {
+        if (res) {
+          this.dataUsuarios.todos = res;
+        } else {
+          this._notificaciones.mostrar("info", "No hay usuarios para cargar desde la base de datos.");
+        }
+        this._usuarios.enviarData(this.dataUsuarios); // Llamamos al método enviarData del servicio para enviarle toda la data
+        this.cargandoDatos = false; // Volvemos el botón falso
+      }, err => {
+        this._notificaciones.mostrar("error", "Hubo un error al intentar cargar los usuarios desde base de datos.");
+        throw err;
       });
-
-      let terceraPromesa = new Promise((resolve, reject) => {
-        this._usuarios.contadorContratos().subscribe((res: any) => {
-          if (res.contador_contratos) {
-            this.contratosRegistrados = res.contador_contratos;
-            resolve(res);
-          }
-        }), catchError((error) => {
-          reject(error);
-          this._notificaciones.mostrar("error", "Hubo un error al intentar cargar el contador de los contratos desde base de datos.");
-          return error;
-        });
-      });
-
-      let cuartaPromesa = new Promise((resolve, reject) => {
-        this._usuarios.contadorInmuebles().subscribe((res: any) => {
-          if (res.contador_inmuebles) {
-            this.contadorInmuebles = res.contador_inmuebles;
-            resolve(res);
-          }
-        }), catchError((error) => {
-          reject(error);
-          this._notificaciones.mostrar("error", "Hubo un error al intentar cargar el contador de los contratos desde base de datos.");
-          return error;
-        });
-      });
-
-      Promise.all([primeraPromesa, segundaPromesa, terceraPromesa, cuartaPromesa]).then(() => {
-        this.cargandoDatos = false;
-      });
-
     }
 
   }
 
-  editarUsuario(elemento: any) {
-    this.usuarioAEditar = elemento;
-    this.mostrarModal = true;
-  }
-
-  crearUsuario(): void {
-    this.mostrarModalUsuarios = !this.mostrarModalUsuarios;
-  }
-
-  recibirEmitirEstado(estado: boolean): void {
-    this.mostrarModal = estado;
-    this.usuarioAEditar = null;
-    this.obtenerTodosLosUsuarios();
-  }
-
-  refreshDataReceive(estado: boolean): void {
-    this.mostrarModalUsuarios = estado;
-    this.obtenerTodosLosUsuarios();
-  }
-
-  eliminarUsuario(usuario: any) {
-
-    if (usuario.id === this._auth.currentUser.id) {
-      this._notificaciones.mostrar("error", "No puedes eliminarte a ti mismo de la base de datos.");
-      return;
-    }
-
-    this._usuarios.eliminarUsuario(usuario).subscribe((res: any) => {
-      if (res) {
-        this._notificaciones.mostrar("correcto", "Has eliminado el usuario correctamente.");
-        this.obtenerTodosLosUsuarios();
-      } else {
-        this._notificaciones.mostrar("error", "Hubo un error al intentar eliminar el usuario desde base de datos.");
-      }
-    }), catchError((error) => {
-      this._notificaciones.mostrar("error", "Hubo un error al intentar eliminar el usuario desde base de datos.");
-      return error;
-    });
-  }
-
-  cerarSesion(): void {
+  cerrarSesion(): void {
     this._auth.logout();
   }
 

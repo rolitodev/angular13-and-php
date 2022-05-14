@@ -1,0 +1,117 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+    <div fxFlex="95%">
+
+        <mat-card>
+
+            <mat-card-content>
+
+                <h2>Usuarios Registrados</h2>
+
+                <div class="center-items">
+
+                    <mat-form-field appearance="standard">
+                        <mat-label>Filtra por Nombre, Apellidos, e.t.c</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                    </mat-form-field>
+
+                    <button mat-mini-fab color="primary" style="background-color: rgb(43, 104, 216); margin-left: 10px;"
+                        (click)="openDialogNuevo();" *ngIf="user && user.idrol === '1'">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">
+                            add
+                        </mat-icon>
+                    </button>
+
+                </div>
+
+                <div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+                    <table mat-table [dataSource]="dataSource" class="table is-fullwidth is-striped" matSort>
+
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fecha_registro">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Creación </th>
+                            <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ultimo_update">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Última Actualización </th>
+                            <td mat-cell *matCellDef="let element"> {{element.fechaUpdate ? element.fechaUpdate
+                                : '-'}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nombres">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="apellidos">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+                            <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="correo">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="pais">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> País </th>
+                            <td mat-cell *matCellDef="let element"> {{element.pais}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="idrol">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.idrol === '1' ? 'Administrador': 'Usuario' }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="botones">
+                            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+
+                            <td mat-cell *matCellDef="let element">
+
+                                <ng-container *ngIf="user && user.idrol === '1'">
+
+                                    <button class="botones-personalizados editar" (click)="editarUsuario(element);">
+                                        <mat-icon aria-hidden="false">
+                                            mode_edit
+                                        </mat-icon>
+                                    </button>
+
+                                    <button class="botones-personalizados eliminar" (click)="eliminarUsuario(element);">
+                                        <mat-icon aria-hidden="false">
+                                            delete
+                                        </mat-icon>
+                                    </button>
+
+                                </ng-container>
+
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No se encontraron resultados de: "{{input.value}}"
+                            </td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[10, 20, 30]" aria-label="Selecciona la página">
+                    </mat-paginator>
+
+                </div>
+
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+
+</div>

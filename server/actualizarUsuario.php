@@ -15,8 +15,8 @@
 
     $bd = include_once "bd.php";
 
-    $sentencia = $bd->prepare("UPDATE usuarios SET nombres = ?, apellidos = ?, password = ?, idrol = ?, pais = ?, direccion = ?, telefono = ? WHERE id = ?");
-    $resultado = $sentencia->execute([$jsonUsuario->nombres, $jsonUsuario->apellidos, $jsonUsuario->password, $jsonUsuario->idrol, $jsonUsuario->pais, $jsonUsuario->direccion, $jsonUsuario->telefono, $jsonUsuario->id]);
+    $sentencia = $bd->prepare("UPDATE usuarios SET nombres = ?, apellidos = ?, password = ?, idrol = ?, pais = ?, direccion = ?, telefono = ?, fechaUpdate = ? WHERE id = ?");
+    $resultado = $sentencia->execute([$jsonUsuario->nombres, $jsonUsuario->apellidos, $jsonUsuario->password, $jsonUsuario->idrol, $jsonUsuario->pais, $jsonUsuario->direccion, $jsonUsuario->telefono, $jsonUsuario->fechaUpdate, $jsonUsuario->id]);
 
     echo json_encode($resultado);
 

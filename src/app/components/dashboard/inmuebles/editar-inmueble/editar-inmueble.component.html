@@ -1,0 +1,93 @@
+<h1 mat-dialog-title>Editar Inmueble</h1>
+
+<div mat-dialog-content>
+
+    <form [formGroup]="formularioEdicion" (ngSubmit)="actualizarInmueble();">
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Matricula</mat-label>
+                    <input type="text" matInput placeholder="Ingresa la matricula" formControlName="matricula">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Propietario</mat-label>
+                    <mat-select formControlName="id_propietario">
+                        <mat-option *ngFor="let propietario of data.usuarios" [value]="propietario.id">
+                            {{propietario.nombres}} {{ propietario.apellidos}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Tipo Inmueble</mat-label>
+                    <mat-select formControlName="id_tipo_inmueble">
+                        <mat-option *ngFor="let tipo of tipoInmueble" [value]="tipo.id">
+                            {{ tipo.nombre }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ubicación Inmueble</mat-label>
+                    <mat-select formControlName="id_ubicacion_inmueble">
+                        <mat-option *ngFor="let ubicacion of data.ubicacion" [value]="ubicacion.id">
+                            {{ ubicacion.pais }} | {{ ubicacion.ciudad }} | {{ ubicacion.direccion }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor Comercial</mat-label>
+                    <input type="number" matInput placeholder="Ingresa el valor comercial"
+                        formControlName="valor_comercial" (keypress)="validateNumber($event)">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Área Total</mat-label>
+                    <input type="number" matInput placeholder="Ingresa el área total" formControlName="area_total"
+                        (keypress)="validateNumber($event)">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Área Construida</mat-label>
+                    <input type="number" matInput placeholder="Ingresa el área construida"
+                        formControlName="area_construida" (keypress)="validateNumber($event)">
+                </mat-form-field>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button mat-raised-button color="primary" [disabled]="cargandoBoton" (click)="actualizarInmueble()"
+        cdkFocusInitial>Actualizar</button>
+    <button mat-button (click)="cerrarModal();">Cancelar</button>
+</div>

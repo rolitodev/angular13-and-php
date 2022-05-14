@@ -14,17 +14,26 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { RegistroComponent } from './components/registro/registro.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { EditarUsuariosComponent } from './components/dashboard/editar-usuarios/editar-usuarios.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { EditarUsuariosComponent } from './components/dashboard/tabla-usuarios/editar-usuarios/editar-usuarios.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecuperarComponent } from './components/recuperar/recuperar.component';
-import { InmueblesComponent } from './components/inmuebles/inmuebles.component';
-import { CrearUsuariosComponent } from './components/dashboard/crear-usuarios/crear-usuarios.component';
+import { InmueblesComponent } from './components/dashboard/inmuebles/inmuebles.component';
+import { CrearUsuariosComponent } from './components/dashboard/tabla-usuarios/crear-usuarios/crear-usuarios.component';
+import { TablaUsuariosComponent } from './components/dashboard/tabla-usuarios/tabla-usuarios.component';
+import { NuevoInmuebleComponent } from './components/dashboard/inmuebles/nuevo-inmueble/nuevo-inmueble.component';
+import { EditarInmuebleComponent } from './components/dashboard/inmuebles/editar-inmueble/editar-inmueble.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +45,10 @@ import { CrearUsuariosComponent } from './components/dashboard/crear-usuarios/cr
     HomeComponent,
     RecuperarComponent,
     InmueblesComponent,
-    CrearUsuariosComponent
+    CrearUsuariosComponent,
+    TablaUsuariosComponent,
+    NuevoInmuebleComponent,
+    EditarInmuebleComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +67,12 @@ import { CrearUsuariosComponent } from './components/dashboard/crear-usuarios/cr
     MatTableModule,
     MatSortModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

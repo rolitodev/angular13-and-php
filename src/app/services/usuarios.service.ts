@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { StorageService } from './storage.service';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,71 +9,49 @@ import { AuthService } from './auth.service';
 
 export class UsuariosService {
 
+  @Output() public allInfo: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public refrescar: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public refrescarInmuebles: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient, private _storage: StorageService, private _auth: AuthService) { }
+  constructor(private http: HttpClient) { }
+
+  enviarData(data: any): void {
+    this.allInfo.emit(data);
+  }
+
+  refrescarData(status: boolean) {
+    this.refrescar.emit(status);
+  }
+
+  refrescarDataInmuebles(status: boolean) {
+    this.refrescarInmuebles.emit(status);
+  }
 
   registro(registro: any): Observable<any> {
-
     if (registro.correo) {
       registro.correo = registro.correo.trim().toLowerCase();
     }
-
     return this.http.post(`${this.baseUrl}/registro.php`, registro).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),
       catchError(this.handleError)
     )
-
   }
 
   obtenerTodos(): Observable<any> {
-
-    return this.http.get(`${this.baseUrl}/getAll.php`).pipe(
+    return this.http.get(`${this.baseUrl}/obtenerTodosUsuarios.php`).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),
       catchError(this.handleError)
     )
-
-  }
-
-  contadorUsuarios(): Observable<any> {
-
-    return this.http.get(`${this.baseUrl}/contadorUsuarios.php`).pipe(
-      map((respuesta: any) => {
-        return respuesta;
-      }),
-      catchError(this.handleError)
-    )
-
-  }
-
-  contadorContratos(): Observable<any> {
-
-    return this.http.get(`${this.baseUrl}/contadorContratos.php`).pipe(
-      map((respuesta: any) => {
-        return respuesta;
-      }),
-      catchError(this.handleError)
-    )
-
-  }
-
-  contadorInmuebles(): Observable<any> {
-
-    return this.http.get(`${this.baseUrl}/contadorInmuebles.php`).pipe(
-      map((respuesta: any) => {
-        return respuesta;
-      }),
-      catchError(this.handleError)
-    )
-
   }
 
   actualizarUsuario(usuario: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/update.php`, usuario).pipe(
+    return this.http.put(`${this.baseUrl}/actualizarUsuario.php`, usuario).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),
@@ -84,7 +60,7 @@ export class UsuariosService {
   }
 
   eliminarUsuario(usuario: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/delete.php?idUser=${usuario.id}`).pipe(
+    return this.http.delete(`${this.baseUrl}/eliminarUsuario.php?idUser=${usuario.id}`).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),
@@ -94,6 +70,60 @@ export class UsuariosService {
 
   enviarCorreo(usuario: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/sendEmail.php`, usuario).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  obtenerInmuebles(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtenerTodosInmuebles.php`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  registrarInmueble(datos: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/insertarInmueble.php`, datos).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  obtenerTipoInmueble(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtenerTipoInmueble.php`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  obtenerUbicacionInmueble(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtenerUbicacionInmueble.php`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  eliminarinmueble(data: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/eliminarInmueble.php?inmueble=${data.id}`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  actualizarInmueble(inmueble: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/actualizarInmueble.php`, inmueble).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),

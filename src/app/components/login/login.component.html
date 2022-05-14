@@ -1,61 +1,48 @@
-<section class="container">
+<section class="centrar-login">
 
-    <div class="columns is-multiline">
+    <div class="contenedor">
+        <h1>¡Bienvenido a Builo Inmobiliaria!</h1>
+        <h1>Inicia Sesión</h1>
+        <p>Desde esta plataforma podrás controlar los ingresos de los usuarios.</p>
 
-        <div class="column is-8 is-offset-2 register">
-
-            <div class="columns">
-
-                <div class="column right has-text-centered">
-
-                    <h1 class="title is-2">¡Bienvenido a Builo Inmobiliaria!</h1>
-                    <h1 class="title is-3">Inicia Sesión</h1>
-                    <p class="description">Desde esta plataforma podrás controlar los ingresos de los usuarios.</p>
-
-                    <form [formGroup]="formularioLogin" (ngSubmit)="enviarFomulario();">
-                        <div class="field">
-                            <div class="control">
-                                <mat-form-field class="full-width" appearance="outline">
-                                    <mat-label>Correo</mat-label>
-                                    <input type="email" matInput placeholder="Ingresa tu correo electrónico"
-                                        formControlName="correo">
-                                </mat-form-field>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <div class="control">
-                                <mat-form-field class="full-width" appearance="outline">
-                                    <mat-label>Contraseña</mat-label>
-                                    <input matInput [type]="hide ? 'password' : 'text'"
-                                        placeholder="Ingresa la contraseña de tu cuenta" formControlName="password">
-                                    <button mat-icon-button matSuffix (click)="hide = !hide"
-                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
-                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                    </button>
-                                </mat-form-field>
-                            </div>
-                        </div>
-
-                        <button class="button is-block is-primary is-fullwidth is-medium" type="submit"
-                            [disabled]="cargandoBoton">Loguearme</button>
-
-                        <br>
-
-                        <small>
-                            <a [routerLink]="['/registro']">¿No tienes una cuenta?</a>
-                            <br>
-                            <a [routerLink]="['/recuperar']">Perdí mi contraseña</a>
-                        </small>
-
-                    </form>
-
+        <form [formGroup]="formularioLogin" (ngSubmit)="enviarFomulario();">
+            <div class="field">
+                <div class="control">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Correo</mat-label>
+                        <input type="email" matInput placeholder="Ingresa tu correo electrónico"
+                            formControlName="correo">
+                    </mat-form-field>
                 </div>
-
             </div>
 
-        </div>
+            <div class="field">
+                <div class="control">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'"
+                            placeholder="Ingresa la contraseña de tu cuenta" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide" type="button">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
 
+            <button mat-button mat-raised-button color="primary" type="submit"
+                [disabled]="cargandoBoton">Loguearme</button>
+
+            <br>
+            <br>
+
+            <small>
+                <a [routerLink]="['/registro']">¿No tienes una cuenta?</a>
+                <br>
+                <a [routerLink]="['/recuperar']">Perdí mi contraseña</a>
+            </small>
+
+        </form>
     </div>
 
 </section>

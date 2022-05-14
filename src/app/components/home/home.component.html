@@ -1,51 +1,44 @@
-<section class="hero is-info is-fullheight">
-    <div class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-                <div class="navbar-brand">
-                    <a class="navbar-item">
-                        <img src="/assets/logo.png" alt="Logo">
-                    </a>
-                    <span class="navbar-burger burger" data-target="navbarMenu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                </div>
-                <div id="navbarMenu" class="navbar-menu">
-                    <div class="navbar-end">
-                        <span class="navbar-item">
-                            <a class="button is-white is-outlined" [routerLink]="['/inicio']">
-                                <span>Inicio</span>
-                            </a>
-                        </span>
-                        <span class="navbar-item">
-                            <a class="button is-white is-outlined" [routerLink]="['/login']">
-                                <span>Login</span>
-                            </a>
-                        </span>
-                        <span class="navbar-item">
-                            <a class="button is-white is-outlined" [routerLink]="['/registro']">
-                                <span>Registro</span>
-                            </a>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+<link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+<script src="https://kit.fontawesome.com/15181efa86.js" crossorigin="anonymous"></script>
+
+<section class="hero is-medium">
 
     <div class="hero-body">
-        <div class="container has-text-centered">
-            <div class="column is-6 is-offset-3">
-                <h1 class="title">
-                    Builo Inmobiliaria
-                </h1>
-                <h2 class="subtitle">
-                    Software para la gestión de la Inmobiliaria Builo.
-                </h2>
-            </div>
+        <div class="container">
+            <h1 class="title is-1 ">Bienvenido a Inmobiliaria Builo</h1>
+            <h2 class="subtitle">Desde esta plataforma podrás acceder a muchos beneficios.</h2>
         </div>
     </div>
 
+</section>
+
+<section id="parallax-1" class="hero is-large ">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-6 is-offset-6">
+                    <h1 class="title is-1 ">Ya tengo una cuenta</h1>
+                    <hr class="content-divider">
+                    <h2 class="subtitle">Inicia sesión haciendo clic <a [routerLink]="['/login']">aquí</a></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="parallax-3" class="hero is-large ">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-6 is-offset-6">
+                    <h1 class="title is-1 ">Quiero Registrarme</h1>
+                    <hr class="content-divider">
+                    <h2 class="subtitle">
+                        Si quieres registrarte simplemente ingresa <a [routerLink]="['/registro']">aquí</a> y llena el
+                        formulario.
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

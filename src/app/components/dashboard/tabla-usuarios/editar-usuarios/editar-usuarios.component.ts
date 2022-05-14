@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { catchError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
@@ -14,11 +15,6 @@ import { allCountries } from 'src/app/tools/countries.tool';
 
 export class EditarUsuariosComponent implements OnInit {
 
-  @Output() public emitirEstado: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  @Input() public mostrarModal: boolean = false;
-  @Input() public usuarioAEditar: any;
-
   public estadoActualModal: boolean = false;
   public hide: boolean = true;
   public cargandoBoton: boolean = false;
@@ -30,7 +26,9 @@ export class EditarUsuariosComponent implements OnInit {
     private _fb: FormBuilder,
     private _notificaciones: NotificacionesService,
     private _usuarios: UsuariosService,
-    public _auth: AuthService
+    public _auth: AuthService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<EditarUsuariosComponent>
   ) {
     this.formularioActualizacion = this._fb.group({
       id: [null],
@@ -41,42 +39,27 @@ export class EditarUsuariosComponent implements OnInit {
       pais: [[], [Validators.required]],
       telefono: [null, [Validators.required]],
       direccion: [null, [Validators.required]],
-      idrol: [null]
+      idrol: [null],
+      fechaUpdate: [new Date()]
     });
   }
 
   ngOnInit(): void {
-    this.countries = allCountries();
-  }
-
-  ngOnChanges() {
-
-    if (this.mostrarModal) {
-      this.estadoActualModal = true;
-    }
-
-    if (this.usuarioAEditar) {
-      this.formularioActualizacion.controls['id'].setValue(this.usuarioAEditar ? this.usuarioAEditar.id : null);
-      this.formularioActualizacion.controls['nombres'].setValue(this.usuarioAEditar ? this.usuarioAEditar.nombres : null);
-      this.formularioActualizacion.controls['apellidos'].setValue(this.usuarioAEditar ? this.usuarioAEditar.apellidos : null);
-      this.formularioActualizacion.controls['correo'].setValue(this.usuarioAEditar ? this.usuarioAEditar.correo : null);
-      this.formularioActualizacion.controls['password'].setValue(this.usuarioAEditar ? this.usuarioAEditar.password : null);
-      this.formularioActualizacion.controls['pais'].setValue(this.usuarioAEditar ? this.usuarioAEditar.pais : null);
-      this.formularioActualizacion.controls['telefono'].setValue(this.usuarioAEditar ? this.usuarioAEditar.telefono : null);
-      this.formularioActualizacion.controls['direccion'].setValue(this.usuarioAEditar ? this.usuarioAEditar.direccion : null);
-      this.formularioActualizacion.controls['idrol'].setValue(this.usuarioAEditar ? this.usuarioAEditar.idrol : null);
-
-      if (this.usuarioAEditar.id === this._auth.currentUser.id) {
+    this.countries = allCountries()
+    if (this.data.data) {
+      this.formularioActualizacion.controls['id'].setValue(this.data.data ? this.data.data.id : null);
+      this.formularioActualizacion.controls['nombres'].setValue(this.data.data ? this.data.data.nombres : null);
+      this.formularioActualizacion.controls['apellidos'].setValue(this.data.data ? this.data.data.apellidos : null);
+      this.formularioActualizacion.controls['correo'].setValue(this.data.data ? this.data.data.correo : null);
+      this.formularioActualizacion.controls['password'].setValue(this.data.data ? this.data.data.password : null);
+      this.formularioActualizacion.controls['pais'].setValue(this.data.data ? this.data.data.pais : null);
+      this.formularioActualizacion.controls['telefono'].setValue(this.data.data ? this.data.data.telefono : null);
+      this.formularioActualizacion.controls['direccion'].setValue(this.data.data ? this.data.data.direccion : null);
+      this.formularioActualizacion.controls['idrol'].setValue(this.data.data ? this.data.data.idrol : null);
+      if (this.data.data.id === this._auth.currentUser.id) {
         this.formularioActualizacion.controls['idrol'].disable();
       }
-
     }
-
-  }
-
-  cerrarModal(): void {
-    this.estadoActualModal = false;
-    this.emitirEstado.emit(false);
   }
 
   guardarDatos(): void {
@@ -91,7 +74,7 @@ export class EditarUsuariosComponent implements OnInit {
     this._usuarios.actualizarUsuario(this.formularioActualizacion.getRawValue()).subscribe((res: any) => {
       if (res) {
         this._notificaciones.mostrar("correcto", "Has actualizado el usuario correctamente");
-        this.cerrarModal();
+        this.dialogRef.close(true);
       } else {
         this._notificaciones.mostrar("error", "No pudimos actualizar el usuario, intental ode nuevo.");
       }
@@ -102,6 +85,10 @@ export class EditarUsuariosComponent implements OnInit {
       throw error;
     });
 
+  }
+
+  cerrarModal(): void {
+    this.dialogRef.close();
   }
 
 }

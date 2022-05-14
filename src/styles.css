@@ -1,14 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6,
+mat-card,
+table,
+mat-sidenav,
+.mat-button,
+.mat-raised-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-fab,
+.mat-mini-fab,
+h1,
+p,
+a {
+    font-family: "Poppins", sans-serif !important;
+}
 
 html {
     background-color: transparent !important;
     overflow-y: auto !important;
+    height: 100%;
 }
 
 body {
     background-color: rgb(238, 235, 235);
+    height: 100%;
 }
 
 @media screen and (max-width: 700px) {
@@ -24,14 +46,59 @@ body {
     bottom: 0px;
 }
 
-.modal {
-    z-index: 2 !important;
-}
-
 .ngx_notification-msg {
-    z-index: 3 !important;
+    z-index: 99999 !important;
 }
 
-.disclamer {
-    display: none !important;
+.container {
+    margin: 20px;
+    overflow-x: auto;
+}
+
+.botones-personalizados {
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.editar {
+    background-color: #35b2e9;
+}
+
+.eliminar {
+    background-color: red;
+}
+
+.full-width {
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 5px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(128, 128, 128, 0.199);
+}
+::-webkit-scrollbar-thumb {
+    background: #979696;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #2e2d2d;
+}
+
+.centrar-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.contenedor {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.35);
 }
