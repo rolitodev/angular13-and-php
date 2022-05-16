@@ -1,0 +1,77 @@
+<h1 mat-dialog-title>Crear Contrato</h1>
+
+<div mat-dialog-content>
+
+    <form [formGroup]="formularioContratoNuevo" (ngSubmit)="registrarDatos();">
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Propietario</mat-label>
+                    <mat-select formControlName="id_propietario">
+                        <mat-option *ngFor="let propietario of usuarios" [value]="propietario.id">
+                            {{propietario.nombres}} {{propietario.apellidos}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Inmueble</mat-label>
+                    <mat-select formControlName="id_inmueble">
+                        <mat-option *ngFor="let inmueble of inmuebles" [value]="inmueble.id">
+                            #{{inmueble.id}} | Matrícula {{inmueble.matricula}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fecha_inicio">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Fecha Final</mat-label>
+                    <input matInput [matDatepicker]="picker_final" formControlName="fecha_final">
+                    <mat-datepicker-toggle matSuffix [for]="picker_final"></mat-datepicker-toggle>
+                    <mat-datepicker #picker_final></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor</mat-label>
+                    <input type="number" matInput placeholder="Valor" formControlName="valor"
+                        (keypress)="validateNumber($event)">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="field">
+            <input type="file" id="file" (change)="handleFileInput($event)">
+        </div>
+
+    </form>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button mat-raised-button color="primary" [disabled]="cargandoBoton" (click)="registrarDatos()"
+        cdkFocusInitial>Guardar</button>
+    <button mat-button (click)="cerrarModal();">Cancelar</button>
+</div>

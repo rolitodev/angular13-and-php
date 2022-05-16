@@ -23,6 +23,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -34,6 +36,8 @@ import { CrearUsuariosComponent } from './components/dashboard/tabla-usuarios/cr
 import { TablaUsuariosComponent } from './components/dashboard/tabla-usuarios/tabla-usuarios.component';
 import { NuevoInmuebleComponent } from './components/dashboard/inmuebles/nuevo-inmueble/nuevo-inmueble.component';
 import { EditarInmuebleComponent } from './components/dashboard/inmuebles/editar-inmueble/editar-inmueble.component';
+import { ContratosComponent } from './components/dashboard/contratos/contratos.component';
+import { ContratoNuevoComponent } from './components/dashboard/contratos/contrato-nuevo/contrato-nuevo.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,9 @@ import { EditarInmuebleComponent } from './components/dashboard/inmuebles/editar
     CrearUsuariosComponent,
     TablaUsuariosComponent,
     NuevoInmuebleComponent,
-    EditarInmuebleComponent
+    EditarInmuebleComponent,
+    ContratosComponent,
+    ContratoNuevoComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +78,9 @@ import { EditarInmuebleComponent } from './components/dashboard/inmuebles/editar
     MatSidenavModule,
     MatListModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,6 +12,7 @@ export class UsuariosService {
   @Output() public allInfo: EventEmitter<any> = new EventEmitter<any>();
   @Output() public refrescar: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public refrescarInmuebles: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public refrescarContratos: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public baseUrl = environment.baseUrl;
 
@@ -27,6 +28,10 @@ export class UsuariosService {
 
   refrescarDataInmuebles(status: boolean) {
     this.refrescarInmuebles.emit(status);
+  }
+
+  refrescarDataContratos(status: boolean) {
+    this.refrescarContratos.emit(status);
   }
 
   registro(registro: any): Observable<any> {
@@ -131,9 +136,26 @@ export class UsuariosService {
     )
   }
 
+  obtenerContratos(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtenerTodosContratos.php`).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  registrarContrato(datos: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/registrarContrato.php`, datos).pipe(
+      map((respuesta: any) => {
+        return respuesta;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
     return throwError(error);
   }
-
 
 }

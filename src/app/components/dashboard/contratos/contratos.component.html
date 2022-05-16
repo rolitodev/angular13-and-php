@@ -1,1 +1,78 @@
-<p>contratos works!</p>
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+    <div fxFlex="95%">
+
+        <mat-card>
+
+            <mat-card-content>
+
+                <h2>Contratos Registrados ({{dataSource.data ? dataSource.data.length : 0}}) </h2>
+
+                <div class="center-items">
+
+                    <button mat-mini-fab color="primary" style="background-color: rgb(43, 104, 216); margin-left: 10px;"
+                        (click)="openDialogNuevo();" *ngIf="user && user.idrol === '1'">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">
+                            add
+                        </mat-icon>
+                    </button>
+
+                </div>
+
+                <div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+                    <table mat-table [dataSource]="dataSource" class="table is-fullwidth is-striped" matSort>
+
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_propietario">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Propietario</th>
+                            <td mat-cell *matCellDef="let element"> {{obtenerPropietario(element.id_propietario)}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id_inmueble">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Inmueble</th>
+                            <td mat-cell *matCellDef="let element"> {{ obtenerInmueble(element.id_inmueble) }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fecha_inicio">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Inicio </th>
+                            <td mat-cell *matCellDef="let element"> {{element.fecha_inicio}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fecha_final">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Final </th>
+                            <td mat-cell *matCellDef="let element"> {{element.fecha_final}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="valor">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+                            <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fechaUpdate">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Actualización </th>
+                            <td mat-cell *matCellDef="let element"> {{element.fechaUpdate ? element.fechaUpdate : '-'}}
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[10, 20, 30]" aria-label="Selecciona la página">
+                    </mat-paginator>
+
+                </div>
+
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+
+</div>

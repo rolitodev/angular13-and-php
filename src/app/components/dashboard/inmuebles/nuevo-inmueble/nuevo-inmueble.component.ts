@@ -96,15 +96,15 @@ export class NuevoInmuebleComponent implements OnInit {
 
     this._usuarios.registrarInmueble(this.formularioCreacion.getRawValue()).subscribe((res: any) => {
       if (res) {
-        this._notificaciones.mostrar('correcto', 'El usuario se ha registrado correctamente.');
+        this._notificaciones.mostrar('correcto', 'El inmueble se ha registrado correctamente.');
         this.cerrarModal();
         this._usuarios.refrescarDataInmuebles(true);
       } else {
-        this._notificaciones.mostrar('error', 'Ocurrió un error al intentar registrar el usuario, intentalo de nuevo.');
+        this._notificaciones.mostrar('error', 'Ocurrió un error al intentar registrar el inmueble, intentalo de nuevo.');
       }
       this.cargandoBoton = false;
     }, err => {
-      this._notificaciones.mostrar('error', 'Ocurrió un error al intentar registrar el usuario, intentalo de nuevo.');
+      this._notificaciones.mostrar('error', 'Ocurrió un error al intentar registrar el inmueble, intentalo de nuevo.');
       this.cargandoBoton = false;
       throw err;
     });
