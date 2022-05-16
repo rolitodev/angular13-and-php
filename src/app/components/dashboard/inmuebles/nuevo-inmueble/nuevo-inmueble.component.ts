@@ -31,7 +31,7 @@ export class NuevoInmuebleComponent implements OnInit {
       matricula: [this.makeId(6), [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
       id_propietario: [null, [Validators.required]],
       id_tipo_inmueble: [null, [Validators.required]],
-      id_ubicacion_inmueble: [null, [Validators.required]],
+      direccion: [null, [Validators.required]],
       valor_comercial: [0, [Validators.required]],
       area_total: [0, [Validators.required]],
       area_construida: [0, [Validators.required]],
@@ -67,17 +67,7 @@ export class NuevoInmuebleComponent implements OnInit {
       });
     });
 
-    let promesa3 = new Promise((resolve, reject) => {
-      this._usuarios.obtenerUbicacionInmueble().subscribe((res: any) => {
-        this.ubicacion = res;
-        resolve(res);
-      }, err => {
-        reject(err);
-        throw err;
-      });
-    });
-
-    Promise.all([promesa1, promesa2, promesa3]).then(() => { // Si se cumplen las tres promesaas
+    Promise.all([promesa1, promesa2]).then(() => { // Si se cumplen las tres promesaas
       this.cargandoDatos = false; // Volvemos el botón falso
     }).catch(err => {
       this._notificaciones.mostrar('error', 'Ocurrió un error al realizar las peticiones a la base de datos.');

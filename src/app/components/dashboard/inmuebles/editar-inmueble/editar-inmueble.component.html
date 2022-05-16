@@ -42,12 +42,8 @@
         <div class="field">
             <div class="control">
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Ubicación Inmueble</mat-label>
-                    <mat-select formControlName="id_ubicacion_inmueble">
-                        <mat-option *ngFor="let ubicacion of data.ubicacion" [value]="ubicacion.id">
-                            {{ ubicacion.pais }} | {{ ubicacion.ciudad }} | {{ ubicacion.direccion }}
-                        </mat-option>
-                    </mat-select>
+                    <mat-label>Dirección</mat-label>
+                    <input type="text" matInput placeholder="Ingresa la direccion" formControlName="direccion">
                 </mat-form-field>
             </div>
         </div>

@@ -47,10 +47,10 @@ export class CrearUsuariosComponent implements OnInit {
     this.cargandoBoton = true;
 
     this._usuarios.registro(this.formularioCreacion.getRawValue()).subscribe((res: any) => {
-      if (res) {
+      if (res) { 
         this._notificaciones.mostrar('correcto', 'Hemos registrado el usuario correctamente.');
-
-      } else {
+        this.cerrarModal();
+      } else { 
         this._notificaciones.mostrar('error', 'No pudimos registrar el usuario. Intentalo de nuevo.');
       }
       this.cargandoBoton = false;

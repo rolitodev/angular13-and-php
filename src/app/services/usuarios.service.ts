@@ -109,15 +109,6 @@ export class UsuariosService {
     )
   }
 
-  obtenerUbicacionInmueble(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/obtenerUbicacionInmueble.php`).pipe(
-      map((respuesta: any) => {
-        return respuesta;
-      }),
-      catchError(this.handleError)
-    )
-  }
-
   eliminarinmueble(data: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/eliminarInmueble.php?inmueble=${data.id}`).pipe(
       map((respuesta: any) => {

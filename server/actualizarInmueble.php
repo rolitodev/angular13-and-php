@@ -15,9 +15,9 @@
 
     $bd = include_once "bd.php";
     
-    $sentencia = $bd->prepare("UPDATE inmuebles SET id_propietario = ?, id_tipo_inmueble = ?, id_ubicacion_inmueble = ?, valor_comercial = ?, area_total = ?, area_construida = ?, fechaUpdate = ? WHERE id = ?");
+    $sentencia = $bd->prepare("UPDATE inmuebles SET id_propietario = ?, id_tipo_inmueble = ?, direccion = ?, valor_comercial = ?, area_total = ?, area_construida = ?, fechaUpdate = ? WHERE id = ?");
 
-    $resultado = $sentencia->execute([$jsonUsuario->id_propietario, $jsonUsuario->id_tipo_inmueble, $jsonUsuario->id_ubicacion_inmueble, $jsonUsuario->valor_comercial, $jsonUsuario->area_total, $jsonUsuario->area_construida, $jsonUsuario->fechaUpdate, $jsonUsuario->id]);
+    $resultado = $sentencia->execute([$jsonUsuario->id_propietario, $jsonUsuario->id_tipo_inmueble, $jsonUsuario->direccion, $jsonUsuario->valor_comercial, $jsonUsuario->area_total, $jsonUsuario->area_construida, $jsonUsuario->fechaUpdate, $jsonUsuario->id]);
 
     echo json_encode($resultado);
 

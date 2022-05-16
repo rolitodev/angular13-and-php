@@ -20,7 +20,7 @@ export class InmueblesComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) public paginator!: MatPaginator;
 
-  public displayedColumns: string[] = ['id', 'fecha', 'matricula', 'id_propietario', 'id_tipo_inmueble', 'id_ubicacion_inmueble', 'valor_comercial', 'area_total', 'area_construida', 'botones'];
+  public displayedColumns: string[] = ['id', 'fecha', 'matricula', 'id_propietario', 'id_tipo_inmueble', 'direccion', 'valor_comercial', 'area_total', 'area_construida', 'botones'];
   public dataSource: any = [];
 
   public user: any = null;
@@ -45,36 +45,12 @@ export class InmueblesComponent implements OnInit {
   }
 
   obtenerDatos(): void {
-
-    let promesa1 = new Promise((resolve, reject) => {
-      this._usuarios.obtenerTodos().subscribe((res: any) => {
-        this.usuarios = res;
-        resolve(res);
-      }, err => {
-        reject(err);
-        throw err;
-      });
+    this._usuarios.obtenerTodos().subscribe((res: any) => {
+      this.usuarios = res;
+    }, err => {
+      throw err;
     });
-
-    let promesa2 = new Promise((resolve, reject) => {
-      this._usuarios.obtenerUbicacionInmueble().subscribe((res: any) => {
-        this.ubicacion = res;
-        resolve(res);
-      }, err => {
-        reject(err);
-        throw err;
-      });
-    });
-
     this.obtenerTodosInmuebles();
-
-    Promise.all([promesa1, promesa2]).then(() => {
-
-    }).catch(error => {
-      this._notificaciones.mostrar('error', 'Ocurrió un error al realizar las peticiones a la base de datos.');
-      throw error;
-    });
-
   }
 
   obtenerTodosInmuebles(): void {
@@ -105,7 +81,7 @@ export class InmueblesComponent implements OnInit {
   editarInmueble(inmueble: any) {
     const dialogRef = this.dialog.open(EditarInmuebleComponent, {
       width: '700px',
-      data: {inmueble: inmueble, usuarios: this.usuarios, ubicacion: this.ubicacion }
+      data: { inmueble: inmueble, usuarios: this.usuarios, ubicacion: this.ubicacion }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

@@ -29,7 +29,7 @@ export class EditarInmuebleComponent implements OnInit {
       matricula: [{ value: null, disabled: true }, [Validators.required]],
       id_propietario: [null, [Validators.required]],
       id_tipo_inmueble: [null, [Validators.required]],
-      id_ubicacion_inmueble: [null, [Validators.required]],
+      direccion: [null, [Validators.required]],
       valor_comercial: [0, [Validators.required]],
       area_total: [0, [Validators.required]],
       area_construida: [0, [Validators.required]],
@@ -49,7 +49,7 @@ export class EditarInmuebleComponent implements OnInit {
       this.formularioEdicion.controls['matricula'].setValue(this.data.inmueble.matricula);
       this.formularioEdicion.controls['id_propietario'].setValue(this.data.inmueble.id_propietario);
       this.formularioEdicion.controls['id_tipo_inmueble'].setValue(this.data.inmueble.id_tipo_inmueble);
-      this.formularioEdicion.controls['id_ubicacion_inmueble'].setValue(this.data.inmueble.id_ubicacion_inmueble);
+      this.formularioEdicion.controls['direccion'].setValue(this.data.inmueble.direccion);
       this.formularioEdicion.controls['valor_comercial'].setValue(this.data.inmueble.valor_comercial);
       this.formularioEdicion.controls['area_total'].setValue(this.data.inmueble.area_total);
       this.formularioEdicion.controls['area_construida'].setValue(this.data.inmueble.area_construida);

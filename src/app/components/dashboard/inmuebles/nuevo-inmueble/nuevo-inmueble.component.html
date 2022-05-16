@@ -17,11 +17,11 @@
             <div class="control">
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Propietario</mat-label>
-                  <mat-select formControlName="id_propietario">
+                    <mat-select formControlName="id_propietario">
                         <mat-option *ngFor="let propietario of usuarios" [value]="propietario.id">
                             {{propietario.nombres}} {{ propietario.apellidos}}
                         </mat-option>
-                    </mat-select> 
+                    </mat-select>
                 </mat-form-field>
             </div>
         </div>
@@ -30,24 +30,20 @@
             <div class="control">
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Tipo Inmueble</mat-label>
-                  <mat-select formControlName="id_tipo_inmueble">
+                    <mat-select formControlName="id_tipo_inmueble">
                         <mat-option *ngFor="let tipo of tipoInmuebles" [value]="tipo.id">
                             {{ tipo.nombre }}
                         </mat-option>
-                    </mat-select> 
+                    </mat-select>
                 </mat-form-field>
             </div>
         </div>
-        
+
         <div class="field">
             <div class="control">
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Ubicación Inmueble</mat-label>
-                  <mat-select formControlName="id_ubicacion_inmueble">
-                        <mat-option *ngFor="let ubicacion of ubicacion" [value]="ubicacion.id">
-                            {{ ubicacion.pais }} | {{ ubicacion.ciudad }} | {{ ubicacion.direccion }}
-                        </mat-option>
-                    </mat-select> 
+                    <mat-label>Dirección</mat-label>
+                    <input type="text" matInput placeholder="Ingresa la direccion" formControlName="direccion">
                 </mat-form-field>
             </div>
         </div>
@@ -56,8 +52,8 @@
             <div class="control">
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor Comercial</mat-label>
-                    <input type="number" matInput placeholder="Ingresa el valor comercial" formControlName="valor_comercial"
-                        (keypress)="validateNumber($event)">
+                    <input type="number" matInput placeholder="Ingresa el valor comercial"
+                        formControlName="valor_comercial" (keypress)="validateNumber($event)">
                 </mat-form-field>
             </div>
         </div>
@@ -76,8 +72,8 @@
             <div class="control">
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Área Construida</mat-label>
-                    <input type="number" matInput placeholder="Ingresa el área construida" formControlName="area_construida"
-                        (keypress)="validateNumber($event)">
+                    <input type="number" matInput placeholder="Ingresa el área construida"
+                        formControlName="area_construida" (keypress)="validateNumber($event)">
                 </mat-form-field>
             </div>
         </div>

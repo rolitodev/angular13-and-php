@@ -53,10 +53,9 @@
                             </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="id_ubicacion_inmueble">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ubicación Inmueble </th>
-                            <td mat-cell *matCellDef="let element"> {{ retornarUbicacionInmueble(element.
-                                id_ubicacion_inmueble) }} </td>
+                        <ng-container matColumnDef="direccion">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
+                            <td mat-cell *matCellDef="let element">{{element.direccion}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="valor_comercial">
