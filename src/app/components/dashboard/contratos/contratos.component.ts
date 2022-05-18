@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ContratoNuevoComponent } from './contrato-nuevo/contrato-nuevo.component';
+import { VerPdfComponent } from './ver-pdf/ver-pdf.component';
 
 @Component({
   selector: 'app-contratos',
@@ -20,7 +21,7 @@ export class ContratosComponent implements OnInit {
   @ViewChild(MatPaginator) public paginator!: MatPaginator;
 
   public dataSource: any = [];
-  public displayedColumns: string[] = ['id', 'id_propietario', 'id_inmueble', 'fecha_inicio', 'fecha_final', 'valor', 'fechaUpdate',];
+  public displayedColumns: string[] = ['id', 'id_propietario', 'id_inmueble', 'fecha_inicio', 'fecha_final', 'valor', 'fechaUpdate', 'botones'];
 
   public user: any = null;
 
@@ -82,6 +83,17 @@ export class ContratosComponent implements OnInit {
       if (result) {
         this._usuarios.refrescarData(result);
       }
+    });
+  }
+
+  abrirPdf(data: any) {
+    if (!data.imagen_contrato) {
+      this._notificaciones.mostrar('error', 'El contrato no tiene registrado un PDF');
+      return;
+    }
+    const dialogRef = this.dialog.open(VerPdfComponent, {
+      width: '1000px',
+      data: { ...data }
     });
   }
 

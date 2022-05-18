@@ -63,7 +63,7 @@
         </div>
 
         <div class="field">
-            <input type="file" id="file" (change)="handleFileInput($event)">
+            <input type="file" id="file" formControlName="archivo" (change)="handleFileInput($event)" accept=".pdf">
         </div>
 
     </form>

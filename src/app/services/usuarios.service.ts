@@ -136,8 +136,8 @@ export class UsuariosService {
     )
   }
 
-  registrarContrato(datos: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/registrarContrato.php`, datos).pipe(
+  registrarContrato(id: string, formData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/registrarContrato.php?id=${id}`, formData).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),

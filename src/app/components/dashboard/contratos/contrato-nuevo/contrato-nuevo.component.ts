@@ -20,7 +20,8 @@ export class ContratoNuevoComponent implements OnInit {
   public usuarios: any = [];
   public inmuebles: any = [];
 
-  public fileToUpload: File | null = null;
+  public formData: FormData = new FormData();;
+  public randomId: any = null;
 
   constructor(private _fb: FormBuilder,
     private _notificaciones: NotificacionesService,
@@ -34,6 +35,7 @@ export class ContratoNuevoComponent implements OnInit {
       fecha_inicio: [null, [Validators.required]],
       fecha_final: [null, [Validators.required]],
       valor: [0, [Validators.required]],
+      archivo: [null, [Validators.required]],
       fecha: [new Date()]
     });
   }
@@ -56,7 +58,17 @@ export class ContratoNuevoComponent implements OnInit {
     });
   }
 
-  handleFileInput(files: any) {
+  handleFileInput(event: any) {
+    this.randomId = this.randomString(8);
+    let fileList: FileList = event.target.files;
+    let file: File = fileList[0];
+
+    if (file.type === 'application/pdf') {
+      this.formData.append('uploadFile', file, this.randomId + ".pdf");
+      this.formData.append('datos', JSON.stringify(this.formularioContratoNuevo.getRawValue()));
+    } else {
+      this._notificaciones.mostrar('error', 'Solo permitimos archivos con extensión .pdf');
+    }
   }
 
   registrarDatos(): void {
@@ -72,7 +84,7 @@ export class ContratoNuevoComponent implements OnInit {
     }
 
     this.cargandoBoton = true;
-    this._usuarios.registrarContrato(this.formularioContratoNuevo.getRawValue()).subscribe((res: any) => {
+    this._usuarios.registrarContrato(this.randomId, this.formData).subscribe((res: any) => {
       if (res) {
         this._notificaciones.mostrar('correcto', 'Se ha registrado el contrato exitosamente.');
         this._usuarios.refrescarDataContratos(true);
@@ -80,6 +92,7 @@ export class ContratoNuevoComponent implements OnInit {
       }
       this.cargandoBoton = false;
     }, err => {
+      this._notificaciones.mostrar('error', 'No se pudo realizar la petición. Intentalo de nuevo.');
       this.cargandoBoton = false;
       throw err;
     });
@@ -89,6 +102,15 @@ export class ContratoNuevoComponent implements OnInit {
     if (!e.key.match(/^[0-9.,]+$/)) {
       e.preventDefault();
     }
+  }
+
+  randomString(length: number) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
   }
 
   cerrarModal(): void {

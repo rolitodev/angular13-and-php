@@ -38,6 +38,8 @@ import { NuevoInmuebleComponent } from './components/dashboard/inmuebles/nuevo-i
 import { EditarInmuebleComponent } from './components/dashboard/inmuebles/editar-inmueble/editar-inmueble.component';
 import { ContratosComponent } from './components/dashboard/contratos/contratos.component';
 import { ContratoNuevoComponent } from './components/dashboard/contratos/contrato-nuevo/contrato-nuevo.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { VerPdfComponent } from './components/dashboard/contratos/ver-pdf/ver-pdf.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { ContratoNuevoComponent } from './components/dashboard/contratos/contrat
     NuevoInmuebleComponent,
     EditarInmuebleComponent,
     ContratosComponent,
-    ContratoNuevoComponent
+    ContratoNuevoComponent,
+    VerPdfComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { ContratoNuevoComponent } from './components/dashboard/contratos/contrat
     MatDialogModule,
     MatPaginatorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    PdfViewerModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
