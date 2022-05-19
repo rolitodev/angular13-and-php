@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -21,11 +22,14 @@ export class NuevoInmuebleComponent implements OnInit {
   public tipoInmuebles: any = [];
   public ubicacion: any = [];
 
+  public user: any = null;
+
   constructor(
     private _fb: FormBuilder,
     public _notificaciones: NotificacionesService,
     public _usuarios: UsuariosService,
-    public dialogRef: MatDialogRef<NuevoInmuebleComponent>
+    public dialogRef: MatDialogRef<NuevoInmuebleComponent>,
+    public _auth: AuthService
   ) {
     this.formularioCreacion = this._fb.group({
       matricula: [this.makeId(6), [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
@@ -40,6 +44,7 @@ export class NuevoInmuebleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this._auth.currentUser;
     this.cargandoDato();
   }
 
@@ -48,7 +53,7 @@ export class NuevoInmuebleComponent implements OnInit {
     this.cargandoDatos = true;
 
     let promesa1 = new Promise((resolve, reject) => {
-      this._usuarios.obtenerTodos().subscribe((res: any) => {
+      this._usuarios.obtenerTodos(this.user.idrol, this.user.id).subscribe((res: any) => {
         this.usuarios = res;
         resolve(res);
       }, err => {
