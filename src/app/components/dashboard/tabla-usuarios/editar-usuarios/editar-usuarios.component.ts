@@ -74,6 +74,7 @@ export class EditarUsuariosComponent implements OnInit {
     this._usuarios.actualizarUsuario(this.formularioActualizacion.getRawValue()).subscribe((res: any) => {
       if (res) {
         this._notificaciones.mostrar("correcto", "Has actualizado el usuario correctamente");
+        this._usuarios.refrescarData(true);
         this.cerrarModal();
       } else {
         this._notificaciones.mostrar("error", "No pudimos actualizar el usuario, intentalo de nuevo.");

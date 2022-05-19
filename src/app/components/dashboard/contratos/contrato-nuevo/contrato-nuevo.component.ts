@@ -23,6 +23,8 @@ export class ContratoNuevoComponent implements OnInit {
   public formData: FormData = new FormData();;
   public randomId: any = null;
 
+  public user: any = null;
+
   constructor(private _fb: FormBuilder,
     private _notificaciones: NotificacionesService,
     private _usuarios: UsuariosService,
@@ -41,17 +43,18 @@ export class ContratoNuevoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this._auth.currentUser;
     this.obtenerDatos();
   }
 
   obtenerDatos(): void {
-    this._usuarios.obtenerTodos().subscribe((res: any) => {
+    this._usuarios.obtenerTodos(this.user.idrol, this.user.id).subscribe((res: any) => {
       this.usuarios = res;
     }, err => {
       throw err;
     });
 
-    this._usuarios.obtenerInmuebles().subscribe((res: any) => {
+    this._usuarios.obtenerInmuebles(this.user.idrol, this.user.id).subscribe((res: any) => {
       this.inmuebles = res;
     }, err => {
       throw err;

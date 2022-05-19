@@ -46,8 +46,8 @@ export class UsuariosService {
     )
   }
 
-  obtenerTodos(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/obtenerTodosUsuarios.php`).pipe(
+  obtenerTodos(rol?: string, id?: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtenerTodosUsuarios.php?rol=${rol}&id=${id}`).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),
@@ -82,8 +82,8 @@ export class UsuariosService {
     )
   }
 
-  obtenerInmuebles(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/obtenerTodosInmuebles.php`).pipe(
+  obtenerInmuebles(rol?: string, id?: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtenerTodosInmuebles.php?rol=${rol}&id=${id}`).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),
@@ -127,8 +127,8 @@ export class UsuariosService {
     )
   }
 
-  obtenerContratos(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/obtenerTodosContratos.php`).pipe(
+  obtenerContratos(rol?: string, id?: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtenerTodosContratos.php?rol=${rol}&id=${id}`).pipe(
       map((respuesta: any) => {
         return respuesta;
       }),

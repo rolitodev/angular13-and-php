@@ -50,6 +50,7 @@ export class CrearUsuariosComponent implements OnInit {
       if (res) { 
         this._notificaciones.mostrar('correcto', 'Hemos registrado el usuario correctamente.');
         this.cerrarModal();
+        this._usuarios.refrescarData(true);
       } else { 
         this._notificaciones.mostrar('error', 'No pudimos registrar el usuario. Intentalo de nuevo.');
       }

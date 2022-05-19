@@ -54,7 +54,7 @@ export class InmueblesComponent implements OnInit {
   }
 
   obtenerTodosInmuebles(): void {
-    this._usuarios.obtenerInmuebles().subscribe((res: any) => {
+    this._usuarios.obtenerInmuebles(this.user.idrol, this.user.id).subscribe((res: any) => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
     if (this.user) {
 
       this.cargandoDatos = true;
-      this._usuarios.obtenerTodos().subscribe((res: any) => {
+      this._usuarios.obtenerTodos(this.user.idrol, this.user.id).subscribe((res: any) => {
         if (res) {
           this.dataUsuarios.todos = res;
         } else {

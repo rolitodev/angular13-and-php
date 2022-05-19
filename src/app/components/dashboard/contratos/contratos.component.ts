@@ -43,7 +43,7 @@ export class ContratosComponent implements OnInit {
 
   obtenerDatos(): void {
 
-    this._usuarios.obtenerContratos().subscribe((res: any) => {
+    this._usuarios.obtenerContratos(this.user.idrol, this.user.id).subscribe((res: any) => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -51,13 +51,13 @@ export class ContratosComponent implements OnInit {
       throw err;
     });
 
-    this._usuarios.obtenerTodos().subscribe((res: any) => {
+    this._usuarios.obtenerTodos(this.user.idrol, this.user.id).subscribe((res: any) => {
       this.usuarios = res;
     }, err => {
       throw err;
     });
 
-    this._usuarios.obtenerInmuebles().subscribe((res: any) => {
+    this._usuarios.obtenerInmuebles(this.user.idrol, this.user.id).subscribe((res: any) => {
       this.inmuebles = res;
     }, err => {
       throw err;
