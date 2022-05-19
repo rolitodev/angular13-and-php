@@ -24,7 +24,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -38,8 +40,19 @@ import { NuevoInmuebleComponent } from './components/dashboard/inmuebles/nuevo-i
 import { EditarInmuebleComponent } from './components/dashboard/inmuebles/editar-inmueble/editar-inmueble.component';
 import { ContratosComponent } from './components/dashboard/contratos/contratos.component';
 import { ContratoNuevoComponent } from './components/dashboard/contratos/contrato-nuevo/contrato-nuevo.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VerPdfComponent } from './components/dashboard/contratos/ver-pdf/ver-pdf.component';
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 
 @NgModule({
   declarations: [
@@ -84,9 +97,12 @@ import { VerPdfComponent } from './components/dashboard/contratos/ver-pdf/ver-pd
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    PdfViewerModule 
+    PdfViewerModule,
+    MomentDateModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 

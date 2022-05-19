@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -86,6 +87,11 @@ export class ContratoNuevoComponent implements OnInit {
       return;
     }
 
+    if (moment(this.formularioContratoNuevo.getRawValue().fecha_inicio).isSame(this.formularioContratoNuevo.getRawValue().fecha_final)) {
+      this._notificaciones.mostrar('error', 'El contrato no puede vencer el mismo día.');
+      return;
+    }
+
     this.cargandoBoton = true;
     this._usuarios.registrarContrato(this.randomId, this.formData).subscribe((res: any) => {
       if (res) {
@@ -99,6 +105,7 @@ export class ContratoNuevoComponent implements OnInit {
       this.cargandoBoton = false;
       throw err;
     });
+
   }
 
   validateNumber(e: any) {
