@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: "https://backendbuilo.alwaysdata.net/server", 
+  baseUrl: "https://inmobiliariadccn.alwaysdata.net/server", 
 };
