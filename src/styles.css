@@ -62,11 +62,11 @@ body {
 }
 
 .editar {
-    background-color: #182748;
+    background-color: #46629c;
 }
 
 .eliminar {
-    background-color: red;
+    background-color: #f54748;
 }
 
 .full-width {
@@ -105,4 +105,12 @@ body {
 
 table {
     width: 100%;
+}
+
+.mat-toolbar.mat-primary {
+    background-color: #42c3a7 !important;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background-color: #42c3a7 !important;
 }
