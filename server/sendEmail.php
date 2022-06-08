@@ -28,10 +28,10 @@ if ($resultado_login) {
 
     if($resultado){
 
-        $from = "no-responder@inmobiliariabuilo.com";
+        $from = "no-responder@inmobiliariadccn.com";
         $to = $jsonUsuario->correo;
         $subject = "Recuperar tu Password";
-        $message = "Hola ".$resultado_login->nombres."!\nEnviaste una solicitud para restablecer tu contraseña.\n\nTu nueva contraseña es: ". $codigo . "\nDebes ingresar a la plataforma con esta nueva contraseña.\n\nDel equipo de Builo." ;
+        $message = "Hola ".$resultado_login->nombres."!\nEnviaste una solicitud para restablecer tu contraseña.\n\nTu nueva contraseña es: ". $codigo . "\nDebes ingresar a la plataforma con esta nueva contraseña.\n\nDel equipo de DCCN." ;
         $headers = "From:" . $from;
     
         if(mail($to, $subject, $message, $headers)){

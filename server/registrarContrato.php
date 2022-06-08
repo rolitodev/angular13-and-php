@@ -6,10 +6,10 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
 $jsonLogin = json_decode(file_get_contents("php://input"));
 
-define('AWS_S3_KEY', 'AKIAZLHVY2PX64J53E5G');
-define('AWS_S3_SECRET', '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');
+define('AWS_S3_KEY', 'AKIASWEDEJGTRBCJPEXU');
+define('AWS_S3_SECRET', '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');
 define('AWS_S3_REGION', 'us-east-1');
-define('AWS_S3_BUCKET', 'archivos-builo');
+define('AWS_S3_BUCKET', 'camilomanbucket');
 define('AWS_S3_URL', 'http://s3.'.AWS_S3_REGION.'.amazonaws.com/'.AWS_S3_BUCKET.'/');
 
 $id = $_GET["id"];
@@ -27,7 +27,7 @@ if (defined('AWS_S3_URL')) {
   unlink($tmpfile);
 
   $bd = include_once "bd.php";
-  $urlFinal = "https://archivos-builo.s3.amazonaws.com/". $id .".pdf";
+  $urlFinal = "https://camilomanbucket.s3.amazonaws.com/". $id .".pdf";
 
   $sentencia = $bd->prepare("INSERT INTO contratos(id_propietario, id_inmueble, fecha_inicio, fecha_final, valor, fecha, imagen_contrato) VALUES (?,?,?,?,?,?,?)");
   $resultado = $sentencia->execute([$datos->id_propietario, $datos->id_inmueble, $datos->fecha_inicio, $datos->fecha_final, $datos->valor, $datos->fecha, $urlFinal]);
