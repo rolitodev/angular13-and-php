@@ -36,6 +36,7 @@ export class InmueblesComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this._auth.currentUser;
+    console.log(this.user);
     this.obtenerDatos();
     this._usuarios.refrescarInmuebles.subscribe((res: any) => {
       if (res) {
@@ -45,7 +46,7 @@ export class InmueblesComponent implements OnInit {
   }
 
   obtenerDatos(): void {
-    this._usuarios.obtenerTodos().subscribe((res: any) => {
+    this._usuarios.obtenerTodos(this.user.idrol, this.user.id).subscribe((res: any) => {
       this.usuarios = res;
     }, err => {
       throw err;
