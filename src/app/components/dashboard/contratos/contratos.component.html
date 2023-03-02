@@ -11,7 +11,7 @@
                 <div class="center-items">
 
                     <button mat-mini-fab color="primary" style="background-color: #42c3a7; margin-left: 10px;"
-                        (click)="openDialogNuevo();" *ngIf="user && user.idrol === '1'">
+                        (click)="openDialogNuevo();">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">
                             add
                         </mat-icon>
@@ -35,7 +35,7 @@
 
                         <ng-container matColumnDef="id_inmueble">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Inmueble</th>
-                            <td mat-cell *matCellDef="let element"> {{ obtenerInmueble(element.id_inmueble) }}
+                            <td mat-cell *matCellDef="let element"> {{obtenerInmueble(element.id_inmueble)}}
                             </td>
                         </ng-container>
 
@@ -51,7 +51,7 @@
 
                         <ng-container matColumnDef="valor">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
-                            <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.valor | currency:'COP ' : 'symbol' : '1.0-0'}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="fechaUpdate">

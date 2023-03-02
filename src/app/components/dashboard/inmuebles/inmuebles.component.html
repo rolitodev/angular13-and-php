@@ -11,7 +11,7 @@
                 <div class="center-items">
 
                     <button mat-mini-fab color="primary" style="background-color: #42c3a7; margin-left: 10px;"
-                        (click)="openDialogNuevo();" *ngIf="user && user.idrol === '1'">
+                        (click)="openDialogNuevo();">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">
                             add
                         </mat-icon>
@@ -40,15 +40,14 @@
 
                         <ng-container matColumnDef="id_propietario">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Propietario </th>
-                            <td mat-cell *matCellDef="let element"> {{ retornarPropietario(element.id_propietario) }}
-                            </td>
+                            <td mat-cell *matCellDef="let element"> {{retornarPropietario(element.id_propietario)}}</td>
                         </ng-container>
 
                         <ng-container matColumnDef="id_tipo_inmueble">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Inmueble </th>
                             <td mat-cell *matCellDef="let element">
                                 <ng-container *ngIf="element.id_tipo_inmueble === '1'">Casa</ng-container>
-                                <ng-container *ngIf="element.id_tipo_inmueble === '3'">Apartamento</ng-container>
+                                <ng-container *ngIf="element.id_tipo_inmueble === '2'">Apartamento</ng-container>
                                 <ng-container *ngIf="element.id_tipo_inmueble === '4'">Terreno</ng-container>
                             </td>
                         </ng-container>
@@ -60,7 +59,7 @@
 
                         <ng-container matColumnDef="valor_comercial">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Comercial </th>
-                            <td mat-cell *matCellDef="let element"> {{element.valor_comercial}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.valor_comercial | currency:'COP ' : 'symbol' : '1.0-0'}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="area_total">
