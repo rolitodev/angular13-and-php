@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://inmobiliariadccn.alwaysdata.net/server",
+  baseUrl: "https://myinmobiliaria.alwaysdata.net/server",
 };
 
 /*

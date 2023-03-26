@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
           this._router.navigate(["/dashboard"]);
         }
         this.cargandoBoton = false;
-      }),
-      catchError((error) => {
+      }, error => {
+        this._notificaciones.mostrar("error", "Ocurrió un error en el servidor backend, intentalo de nuevo.");
         this.cargandoBoton = false;
         return error;
       });

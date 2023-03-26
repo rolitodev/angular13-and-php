@@ -56,7 +56,8 @@
 
                         <ng-container matColumnDef="fechaUpdate">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Actualización </th>
-                            <td mat-cell *matCellDef="let element"> {{element.fechaUpdate ? element.fechaUpdate : '-'}}
+                            <td mat-cell *matCellDef="let element"> 
+                                {{element.fechaUpdate ? element.fechaUpdate : ''}}
                             </td>
                         </ng-container>
 

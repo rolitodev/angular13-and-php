@@ -32,7 +32,7 @@ export class NuevoInmuebleComponent implements OnInit {
     public _auth: AuthService
   ) {
     this.formularioCreacion = this._fb.group({
-      matricula: [this.makeId(6), [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+      matricula: [{value: this.makeId(6), disabled: true}],
       id_propietario: [null, [Validators.required]],
       id_tipo_inmueble: [null, [Validators.required]],
       direccion: [null, [Validators.required]],

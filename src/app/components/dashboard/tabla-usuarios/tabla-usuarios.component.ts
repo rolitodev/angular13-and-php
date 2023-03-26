@@ -38,6 +38,7 @@ export class TablaUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this._auth.currentUser;
+    console.log(this.user)
     this._usuarios.allInfo.subscribe((res: any) => {
       this.allData = res;
       this.dataSource = new MatTableDataSource(this.allData.todos);

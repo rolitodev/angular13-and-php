@@ -79,6 +79,17 @@ export class InmueblesComponent implements OnInit {
     return ubicacionEncontrada ? ubicacionEncontrada.direccion : "";
   }
 
+  retornarTipoInmueble(id: any) {
+    let tipo: any = [
+      { id: 1, name: 'Residencial' },
+      { id: 2, name: 'Simple y Multifamiliar' },
+      { id: 5, name: 'Edificio de Apartamentos' },
+      { id: 6, name: 'Industrial' },
+      { id: 7, name: 'Minorista' }
+    ];
+    return tipo.find((x: any) => x.id == id);
+  }
+
   editarInmueble(inmueble: any) {
     const dialogRef = this.dialog.open(EditarInmuebleComponent, {
       width: '700px',

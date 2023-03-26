@@ -108,9 +108,9 @@ table {
 }
 
 .mat-toolbar.mat-primary {
-    background-color: #42c3a7 !important;
+    background-color: #095da1 !important;
 }
 
 .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
-    background-color: #42c3a7 !important;
+    background-color: #095da1 !important;
 }
